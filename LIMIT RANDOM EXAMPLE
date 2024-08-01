@@ -1,18 +1,16 @@
 /****************************************
-1. Go to the via count
-example: https://via.giantpartners.com/audiences/26524
+1. XYZ
 
-2. Go to the admin view
-Click the admin button or add /admin before /audiences (https://via.giantpartners.com/admin/audiences/26524)
+2. XYZ
 
-3. Copy the query
+3. XYZ
 
 4. Go to Snowflake, Create New SQL Worksheet
 https://app.snowflake.com/
 
-5. Select the DATA_ENGINERRING database from the top
+5. Select the XYZ database from the top
 
-6. Paste the query copied from the via count:
+6. Paste the query copied from the XYZ:
 ****************************************/
 
 SELECT COUNT(*) AS count
@@ -22,8 +20,8 @@ SELECT COUNT(*) AS count
       SELECT *
       FROM (
         SELECT A.ADDRESS_ZIP AS D_address_zip, B.EMAIL AS D_email, B.EMAIL_LEVEL AS D_email_level, A.individual_id AS D_individual_id, A._ID AS D_A_ID, B._ID AS D_B_ID
-        FROM VIA.PRODUCTION.CONSUMER_I361_20240628 AS A
-        INNER JOIN VIA.PRODUCTION.EMAIL_I309_20240628 AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
+        FROM XYZ AS A
+        INNER JOIN ABC AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
         WHERE (A.dpv_indicator = 'Y') AND (A.reading_interest = 'Y') AND (B.EMAIL IS NOT NULL) AND (B.DNE IS NULL)
       ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_address_zip ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
     ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_email ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
@@ -41,8 +39,8 @@ CREATE OR REPLACE TABLE TABLENAME AS SELECT *
       SELECT *
       FROM (
         SELECT A.ADDRESS_ZIP AS D_address_zip, B.EMAIL AS D_email, B.EMAIL_LEVEL AS D_email_level, A.individual_id AS D_individual_id, A._ID AS D_A_ID, B._ID AS D_B_ID
-        FROM VIA.PRODUCTION.CONSUMER_I361_20240628 AS A
-        INNER JOIN VIA.PRODUCTION.EMAIL_I309_20240628 AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
+        FROM XYZ AS A
+        INNER JOIN ABC AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
         WHERE (A.dpv_indicator = 'Y') AND (A.reading_interest = 'Y') AND (B.EMAIL IS NOT NULL) AND (B.DNE IS NULL)
       ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_address_zip ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
     ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_email ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
@@ -62,8 +60,8 @@ CREATE OR REPLACE TABLE TABLENAME AS SELECT *
         SELECT 
             A.FIRST,A.LAST,A.ADDRESS,A.ADDRESS1,A.ADDRESS2,A.CITY,A.STATE,A.ZIP,A.ZIP4,B.EMAIL ---- ADD YOUR SELECTS HERE
             ,A.ADDRESS_ZIP AS D_address_zip, B.EMAIL AS D_email, B.EMAIL_LEVEL AS D_email_level, A.individual_id AS D_individual_id, A._ID AS D_A_ID, B._ID AS D_B_ID
-        FROM VIA.PRODUCTION.CONSUMER_I361_20240628 AS A
-        INNER JOIN VIA.PRODUCTION.EMAIL_I309_20240628 AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
+        FROM XYZ AS A
+        INNER JOIN ABC AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
         WHERE (A.dpv_indicator = 'Y') AND (A.reading_interest = 'Y') AND (B.EMAIL IS NOT NULL) AND (B.DNE IS NULL)
       ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_address_zip ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
     ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_email ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
@@ -91,8 +89,8 @@ CREATE OR REPLACE TABLE TABLENAME AS SELECT *
         SELECT 
             A.FIRST,A.LAST,A.ADDRESS,A.ADDRESS1,A.ADDRESS2,A.CITY,A.STATE,A.ZIP,A.ZIP4,B.EMAIL ---- ADD YOUR SELECTS HERE
             ,A.ADDRESS_ZIP AS D_address_zip, B.EMAIL AS D_email, B.EMAIL_LEVEL AS D_email_level, A.individual_id AS D_individual_id, A._ID AS D_A_ID, B._ID AS D_B_ID
-        FROM VIA.PRODUCTION.CONSUMER_I361_20240628 AS A
-        INNER JOIN VIA.PRODUCTION.EMAIL_I309_20240628 AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
+        FROM XYZ AS A
+        INNER JOIN ABC AS B ON (A.MATCHKEY = B.MATCHKEY AND A.FIRST = B.FIRST AND B.DNE IS NULL)
         WHERE (A.dpv_indicator = 'Y') AND (A.reading_interest = 'Y') AND (B.EMAIL IS NOT NULL) AND (B.DNE IS NULL)
       ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_address_zip ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
     ) QUALIFY (ROW_NUMBER() OVER (PARTITION BY D_email ORDER BY D_email_level, D_individual_id, D_A_ID, D_B_ID)) = 1
